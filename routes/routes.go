@@ -5,7 +5,7 @@ import (
 
 	"go-fiber-api/config"
 	"go-fiber-api/handlers"
-	"go-fiber-api/middleware"
+	middleware "go-fiber-api/middlewares"
 )
 
 func SetupRoutes(app *fiber.App, cfg *config.Config, handler *handlers.ApiHandler) {

@@ -14,7 +14,7 @@ import (
 	"go-fiber-api/config"
 	"go-fiber-api/database"
 	"go-fiber-api/handlers"
-	"go-fiber-api/middleware"
+	middleware "go-fiber-api/middlewares"
 	"go-fiber-api/routes"
 	"go-fiber-api/zplogger"
 )

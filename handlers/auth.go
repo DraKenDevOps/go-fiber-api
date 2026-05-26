@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	// "go-fiber-api/config"
-	"go-fiber-api/middleware"
+	middleware "go-fiber-api/middlewares"
 	"go-fiber-api/models"
 	"go-fiber-api/utils"
 )
