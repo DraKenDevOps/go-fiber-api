@@ -19,20 +19,24 @@ import (
 // }
 
 func (h *ApiHandler) CreateAccount(c *fiber.Ctx) error {
-	var account models.AccReqBody
+	var body models.AccReqBody
 
-	if err := c.BodyParser(&account); err != nil {
+	if err := c.BodyParser(&body); err != nil {
 		log.Printf("Failed to read request body: %v\n", err)
 		return c.JSON(fiber.Map{"status": "error", "message": "Invalid request body"})
 	}
+	if body.Balance == nil {
+		amnt := 0.00
+		body.Balance = &amnt
+	}
 
-	var lastInsertId int64
-	err := h.db.Create(&account).Scan(&lastInsertId).Error
+	var insertId int64
+	err := h.db.Create(&body).Scan(&insertId).Error
 	if err != nil {
 		log.Printf("Failed to create account: %v\n", err)
 		return c.JSON(fiber.Map{"status": "error", "message": "Failed to create account"})
 	}
 
-	log.Printf("Success last account id: %d", lastInsertId)
+	log.Printf("Success last account id: %d", insertId)
 	return c.JSON(fiber.Map{"status": "success", "message": "User created successfully"})
 }

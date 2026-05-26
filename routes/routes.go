@@ -9,7 +9,9 @@ import (
 )
 
 func SetupRoutes(app *fiber.App, cfg *config.Config, handler *handlers.ApiHandler) {
-	api := app.Group("/api")
+	api := app.Group(cfg.BasePath)
 	api.Post("/login", handler.LoginHandler)
-	api.Use(middleware.AuthCheck(cfg)).Get("/refresh", handler.RefreshHandler)
+	api.Use(middleware.AuthChecker(cfg)).Get("/refresh", handler.RefreshHandler)
+	api.Use(middleware.AuthChecker(cfg)).Get("/users", handler.GetUsersRaw)
+	api.Use(middleware.AuthChecker(cfg)).Get("/user/:id", handler.GetUser)
 }

@@ -17,7 +17,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func AuthCheck(cfg *config.Config) fiber.Handler {
+func AuthChecker(cfg *config.Config) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
 		accessToken := c.Get("X-Access-Token")

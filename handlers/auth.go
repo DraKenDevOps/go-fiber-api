@@ -6,7 +6,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	// "go-fiber-api/config"
-	"go-fiber-api/database"
 	"go-fiber-api/middleware"
 	"go-fiber-api/models"
 	"go-fiber-api/utils"
@@ -35,11 +34,12 @@ type LoginResponse struct {
 func (h *ApiHandler) LoginHandler(c *fiber.Ctx) error {
 	var req LoginRequest
 	if err := c.BodyParser(&req); err != nil {
+		log.Printf("Failed to read request body: %v\n", err)
 		return c.JSON(fiber.Map{"status": "error", "message": "Invalid request"})
 	}
 
 	var user models.AuthUser
-	if err := database.DB.Where("username = ?", req.Username).First(&user).Error; err != nil {
+	if err := h.db.Where("username = ?", req.Username).First(&user).Error; err != nil {
 		return c.JSON(fiber.Map{"status": "error", "message": "Invalid credentials"})
 	}
 
