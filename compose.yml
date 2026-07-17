@@ -1,0 +1,22 @@
+services:
+  api:
+    image: api:demo
+    env_file: .env
+    ports:
+      - 8000:8000
+    container_name: api
+    network_mode: bridge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - "DB_URI=mysql://demo:1234@local_mysql::3306/games_store"
+    # volumes:
+    #   - ./logs:/app/logs
+    #   - ./uploads:/app/uploads

@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Build artifacts
+bin/
+dist/
+*.exe
+*.test
+*.out
+
+# Dependency dirs (not needed, go mod handles this)
+vendor/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+
+# Env / secrets
+.env
+.env.*
+
+# Docs
+README.md
+docs/
+
+# Tests (optional — remove if you need them in build context)
+**/*_test.go
+
+# CI
+.github/
+*.sql
+
+# Project files
+Makefile
+STRUCTURE.md
+
+logs
+uploads
